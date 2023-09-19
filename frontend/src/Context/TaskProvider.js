@@ -4,7 +4,8 @@ import io from 'socket.io-client'
 
 var socket;
 const baseUrl = 'https://taskify-72sn.onrender.com/api'
-const ENDPINT = 'http://localhost:5000';
+// const ENDPINT = 'http://localhost:5000';
+const ENDPINT = 'https://taskify-72sn.onrender.com';
 // for production deployment, change it to production url domain
 
 const TaskContext = createContext();
