@@ -41,10 +41,6 @@ const TaskList = () => {
         fetchTasks();
     }, [setFilterdTasks, setTasks, toast, toggleTaskFetch, user.token])
 
-
-
-
-
     return (
         <Box w={{ base: '100%', md: '70%' }} m={'10px auto'} mt='66px' >
             <Filters />
