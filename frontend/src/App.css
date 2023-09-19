@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap'); 
+
+.App{
+   min-height: 100vh;
+  /* width: 100vw; */
+  background-image: url('https://res.cloudinary.com/dm34wmjlm/image/upload/v1694869657/Taskify/taskify-bg_aj348s.avif');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  
+}
+
+.custom__file__input{
+  cursor: pointer;
+}
+.custom__file__input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.custom__file__input::before {
+  content: 'Select File';
+  display: inline-block;
+  color: gray; 
+  border-radius: 5px;
+}
