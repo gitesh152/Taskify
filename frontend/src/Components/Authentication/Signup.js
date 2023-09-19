@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import validator from 'validator';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { TaskState } from '../../Context/TaskProvider';
 
 const Signup = () => {
     const [toggle, setToggle] = useState(false);
@@ -15,6 +16,7 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const toast = useToast();
     const Navigate = useNavigate();
+    const { baseUrl } = TaskState()
 
     const postPic = (pic) => {
         setLoading(true);
@@ -111,7 +113,7 @@ const Signup = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.post('/users/signup', {
+            const { data } = await axios.post(`${baseUrl}/users/signup`, {
                 name, email, password, pic
             }, config);
             localStorage.setItem('userInfo', JSON.stringify(data.user))

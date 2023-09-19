@@ -7,7 +7,7 @@ import { BiTaskX } from 'react-icons/bi'
 import Filters from './Filters';
 
 const TaskList = () => {
-    const { toggleTaskFetch, setTasks, filterdTasks, setFilterdTasks, user } = TaskState();
+    const { baseUrl, toggleTaskFetch, setTasks, filterdTasks, setFilterdTasks, user } = TaskState();
     const [loading, setLoading] = useState(false);
 
     const toast = useToast();
@@ -21,7 +21,7 @@ const TaskList = () => {
                         Authorization: `Bearer ${user.token}`
                     }
                 }
-                const { data } = await axios('/tasks', config);
+                const { data } = await axios(`${baseUrl}/tasks`, config);
                 setTasks(data)
                 setFilterdTasks(data);
                 setLoading(false);
@@ -39,7 +39,7 @@ const TaskList = () => {
             }
         }
         fetchTasks();
-    }, [setFilterdTasks, setTasks, toast, toggleTaskFetch, user.token])
+    }, [baseUrl, setFilterdTasks, setTasks, toast, toggleTaskFetch, user.token])
 
     return (
         <Box w={{ base: '100%', md: '70%' }} m={'10px auto'} mt='66px' >

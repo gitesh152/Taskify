@@ -4,6 +4,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import validator from 'validator';
+import { TaskState } from '../../Context/TaskProvider'
 
 const Login = () => {
     const [toggle, setToggle] = useState(false);
@@ -11,8 +12,8 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false);
     const toast = useToast()
+    const { baseUrl } = TaskState();
     const Navigate = useNavigate();
-
     const handleSubmit = async () => {
         setLoading(true);
         if (!email || !password) {
@@ -46,8 +47,7 @@ const Login = () => {
                     "Content-Type": "application/json"
                 }
             }
-
-            const { data } = await axios.post('/users/login', {
+            const { data } = await axios.post(`${baseUrl}/users/login`, {
                 email, password
             }, config)
             localStorage.setItem('userInfo', JSON.stringify(data.user))

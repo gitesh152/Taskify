@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import io from 'socket.io-client'
 
 var socket;
-
+const baseUrl = 'https://taskify-72sn.onrender.com/api'
 const ENDPINT = 'http://localhost:5000';
 // for production deployment, change it to production url domain
 
@@ -29,7 +29,7 @@ const TaskProvider = ({ children }) => {
     }, [Navigate])
 
     return (
-        <TaskContext.Provider value={{ toggleTaskFetch, settToggleTaskFetch, notification, setNotification, socket, user, tasks, setTasks, filterdTasks, setFilterdTasks }}>
+        <TaskContext.Provider value={{ baseUrl, toggleTaskFetch, settToggleTaskFetch, notification, setNotification, socket, user, tasks, setTasks, filterdTasks, setFilterdTasks }}>
             {children}
         </TaskContext.Provider>
     )

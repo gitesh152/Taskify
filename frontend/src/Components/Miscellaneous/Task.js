@@ -9,7 +9,7 @@ import ProfileModal from './ProfileModal';
 
 const Task = ({ task }) => {
     const toast = useToast()
-    const { notification, setNotification, socket, user, tasks, setTasks, setFilterdTasks, filterdTasks } = TaskState();
+    const { baseUrl, notification, setNotification, socket, user, tasks, setTasks, setFilterdTasks, filterdTasks } = TaskState();
     const [completed, setCompleted] = useState(task.completed);
     const [status, setStatus] = useState(task.status);
     const [loading, setLoading] = useState(false)
@@ -43,7 +43,7 @@ const Task = ({ task }) => {
                     "taskId": taskId
                 }
             }
-            const { data } = await axios.delete(`/tasks`,
+            const { data } = await axios.delete(`${baseUrl}/tasks`,
                 config
             );
             const updatedTasks = filterdTasks.filter(task => task._id !== data._id)
@@ -77,7 +77,7 @@ const Task = ({ task }) => {
                     "Content-Type": "application/json",
                 }
             }
-            const { data } = await axios.put(`/tasks/toggle-complete`, {
+            const { data } = await axios.put(`${baseUrl}/tasks/toggle-complete`, {
                 taskId,
                 completed: bool
             },
@@ -125,7 +125,7 @@ const Task = ({ task }) => {
                     "Content-Type": "application/json",
                 }
             }
-            const { data } = await axios.put(`/tasks/status-update`, {
+            const { data } = await axios.put(`${baseUrl}/tasks/status-update`, {
                 taskId: task._id,
                 status: str
             },
@@ -170,7 +170,7 @@ const Task = ({ task }) => {
                         borderColor='blackAlpha.50'
                         borderWidth='5px'
                     >
-                        <CardHeader p='4' display='flex' flexDirection={{base:'column',sm:'row'}} alignItems='flex-start' gap='2' justifyContent='space-between'>
+                        <CardHeader p='4' display='flex' flexDirection={{ base: 'column', sm: 'row' }} alignItems='flex-start' gap='2' justifyContent='space-between'>
                             <Box display='flex' alignItems='center'>
                                 <Button leftIcon={task.completed ? <CheckIcon /> : <CloseIcon />} colorScheme={task.completed ? 'whatsapp' : 'gray'} color={task.completed ? 'white' : 'gray'} cursor='default'
                                     _hover={{ backgroundColor: 'none', cursor: user._id === task.admin._id ? 'pointer' : 'default' }}
@@ -189,7 +189,7 @@ const Task = ({ task }) => {
                                 </Button>
                                 <Heading size='md' fontFamily='poppins' ps='5' textTransform='uppercase' >{task.title.toString()}</Heading>
                             </Box>
-                            <Box display='inline-flex' fontFamily='poppins' fontSize={{ base: 'xs',sm:'lg' }} textOverflow={'clip'}>
+                            <Box display='inline-flex' fontFamily='poppins' fontSize={{ base: 'xs', sm: 'lg' }} textOverflow={'clip'}>
                                 <Text>Assigned to </Text>
                                 <ProfileModal user={task?.assignee}  >
                                     <Text px='1' color='orange.400' _hover={{ cursor: 'pointer' }}> {task?.assignee?.name}</Text>

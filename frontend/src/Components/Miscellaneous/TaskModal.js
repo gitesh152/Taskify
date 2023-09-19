@@ -35,7 +35,7 @@ const TaskModal = ({ children, task }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [searchResult, setSearchResult] = useState([])
     const [loading, setLoading] = useState(false)
-    const { socket, user, tasks, setTasks, setFilterdTasks } = TaskState();
+    const { baseUrl, socket, user, tasks, setTasks, setFilterdTasks } = TaskState();
     const toast = useToast();
 
     const postFile = async (file) => {
@@ -105,7 +105,7 @@ const TaskModal = ({ children, task }) => {
                         Authorization: `Bearer ${user.token}`
                     }
                 }
-                const { data } = await axios.get(`/users?search=${search}`, config);
+                const { data } = await axios.get(`${baseUrl}/users?search=${search}`, config);
                 setSearchResult(data.users);
                 setLoading(false)
             }
@@ -152,7 +152,7 @@ const TaskModal = ({ children, task }) => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.post(`/tasks`,
+            const { data } = await axios.post(`${baseUrl}/tasks`,
                 {
                     title,
                     description,
@@ -199,7 +199,7 @@ const TaskModal = ({ children, task }) => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.put(`/tasks`,
+            const { data } = await axios.put(`${baseUrl}/tasks`,
                 {
                     taskId,
                     title,
