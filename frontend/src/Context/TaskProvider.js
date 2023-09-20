@@ -2,11 +2,15 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 import io from 'socket.io-client'
 
+// for production deployment, change these to production url domain
+
+// const apiUrl = 'http://localhost:5000/api'
+// const SCOKET_ENDPINT = 'http://localhost:5000';
+
+const apiUrl = 'https://taskify-72sn.onrender.com/api'
+const SCOKET_ENDPINT = 'https://taskify-72sn.onrender.com';
+
 var socket;
-const baseUrl = 'https://taskify-72sn.onrender.com/api'
-// const ENDPINT = 'http://localhost:5000';
-const ENDPINT = 'https://taskify-72sn.onrender.com';
-// for production deployment, change it to production url domain
 
 const TaskContext = createContext();
 
@@ -30,7 +34,7 @@ const TaskProvider = ({ children }) => {
     }, [Navigate])
 
     return (
-        <TaskContext.Provider value={{ baseUrl, toggleTaskFetch, settToggleTaskFetch, notification, setNotification, socket, user, tasks, setTasks, filterdTasks, setFilterdTasks }}>
+        <TaskContext.Provider value={{ apiUrl, toggleTaskFetch, settToggleTaskFetch, notification, setNotification, socket, user, tasks, setTasks, filterdTasks, setFilterdTasks }}>
             {children}
         </TaskContext.Provider>
     )

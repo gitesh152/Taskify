@@ -9,7 +9,7 @@ import ProfileModal from './ProfileModal';
 
 const Task = ({ task }) => {
     const toast = useToast()
-    const { baseUrl, notification, setNotification, socket, user, tasks, setTasks, setFilterdTasks, filterdTasks } = TaskState();
+    const { apiUrl, notification, setNotification, socket, user, tasks, setTasks, setFilterdTasks, filterdTasks } = TaskState();
     const [completed, setCompleted] = useState(task.completed);
     const [status, setStatus] = useState(task.status);
     const [loading, setLoading] = useState(false)
@@ -43,7 +43,7 @@ const Task = ({ task }) => {
                     "taskId": taskId
                 }
             }
-            const { data } = await axios.delete(`${baseUrl}/tasks`,
+            const { data } = await axios.delete(`${apiUrl}/tasks`,
                 config
             );
             const updatedTasks = filterdTasks.filter(task => task._id !== data._id)
@@ -77,7 +77,7 @@ const Task = ({ task }) => {
                     "Content-Type": "application/json",
                 }
             }
-            const { data } = await axios.put(`${baseUrl}/tasks/toggle-complete`, {
+            const { data } = await axios.put(`${apiUrl}/tasks/toggle-complete`, {
                 taskId,
                 completed: bool
             },
@@ -125,7 +125,7 @@ const Task = ({ task }) => {
                     "Content-Type": "application/json",
                 }
             }
-            const { data } = await axios.put(`${baseUrl}/tasks/status-update`, {
+            const { data } = await axios.put(`${apiUrl}/tasks/status-update`, {
                 taskId: task._id,
                 status: str
             },

@@ -16,7 +16,7 @@ const Signup = () => {
     const [loading, setLoading] = useState(false);
     const toast = useToast();
     const Navigate = useNavigate();
-    const { baseUrl } = TaskState()
+    const { apiUrl } = TaskState()
 
     const postPic = (pic) => {
         setLoading(true);
@@ -113,7 +113,7 @@ const Signup = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.post(`${baseUrl}/users/signup`, {
+            const { data } = await axios.post(`${apiUrl}/users/signup`, {
                 name, email, password, pic
             }, config);
             localStorage.setItem('userInfo', JSON.stringify(data.user))

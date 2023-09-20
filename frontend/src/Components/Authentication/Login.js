@@ -12,7 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false);
     const toast = useToast()
-    const { baseUrl } = TaskState();
+    const { apiUrl } = TaskState();
     const Navigate = useNavigate();
     const handleSubmit = async () => {
         setLoading(true);
@@ -47,7 +47,7 @@ const Login = () => {
                     "Content-Type": "application/json"
                 }
             }
-            const { data } = await axios.post(`${baseUrl}/users/login`, {
+            const { data } = await axios.post(`${apiUrl}/users/login`, {
                 email, password
             }, config)
             localStorage.setItem('userInfo', JSON.stringify(data.user))
