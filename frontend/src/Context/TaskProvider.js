@@ -5,10 +5,10 @@ import io from 'socket.io-client'
 // for production deployment, change these to production url domain
 
 // const apiUrl = 'http://localhost:5000/api'
-// const SCOKET_ENDPINT = 'http://localhost:5000';
+// const SOCKET_ENDPOINT = 'http://localhost:5000';
 
 const apiUrl = 'https://taskify-72sn.onrender.com/api'
-const SCOKET_ENDPINT = 'https://taskify-72sn.onrender.com';
+const SOCKET_ENDPOINT = 'https://taskify-72sn.onrender.com';
 
 var socket;
 
@@ -26,7 +26,7 @@ const TaskProvider = ({ children }) => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
         if (userInfo) {
             setUser(userInfo)
-            socket = io(ENDPINT);
+            socket = io(SOCKET_ENDPOINT);
             socket.emit('join room', userInfo)
         }
         else
