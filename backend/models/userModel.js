@@ -14,8 +14,8 @@ userSchema.pre('save', async function (next) {
     if (!this.isModified) {
         next()
     }
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
+    const salt = await bcrypt.genSalt(10);  // a random string called the salt) 
+    this.password = await bcrypt.hash(this.password, salt);     //add salt to password then hash it.
 })
 
 //method to compare encrypted password to request body password
